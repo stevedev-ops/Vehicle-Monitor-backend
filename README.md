@@ -79,3 +79,4 @@ python seed_db.py
 python manage.py runserver
 ```
 API will be accessible at `http://localhost:8000/`.
+
