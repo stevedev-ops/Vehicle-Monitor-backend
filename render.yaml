@@ -1,0 +1,25 @@
+services:
+  - type: web
+    name: vehicle-monitor-backend
+    runtime: python
+    buildCommand: "./build.sh"
+    startCommand: "gunicorn petrol_backend.wsgi:application"
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.0
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DEBUG
+        value: "False"
+      - key: WEB_CONCURRENCY
+        value: "4"
+      - key: DATABASE_URL
+        fromDatabase:
+          name: vehicle-monitor-db
+          property: connectionString
+
+databases:
+  - name: vehicle-monitor-db
+    databaseName: vehicle_monitor
+    user: vehicle_user
+    plan: free
